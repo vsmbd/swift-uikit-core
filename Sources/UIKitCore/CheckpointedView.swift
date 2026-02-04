@@ -33,7 +33,7 @@ open class CheckpointedView: UIView,
 		}
 	}
 
-	nonisolated open func initialize() {
+	open func initialize() {
 		//
 	}
 
@@ -52,7 +52,7 @@ open class CheckpointedView: UIView,
 		}
 	}
 
-	nonisolated open func vwLayoutSubviews() {
+	open func vwLayoutSubviews() {
 		//
 	}
 
@@ -65,7 +65,7 @@ open class CheckpointedView: UIView,
 		}
 	}
 
-	nonisolated open func vwUpdateConstraints() {
+	open func vwUpdateConstraints() {
 		//
 	}
 
@@ -80,7 +80,7 @@ open class CheckpointedView: UIView,
 		}
 	}
 
-	nonisolated open func vwDraw(_ rect: CGRect) {
+	open func vwDraw(_ rect: CGRect) {
 		//
 	}
 
@@ -95,7 +95,7 @@ open class CheckpointedView: UIView,
 		}
 	}
 
-	nonisolated open func vwSizeThatFits(_ size: CGSize) -> CGSize {
+	open func vwSizeThatFits(_ size: CGSize) -> CGSize {
 		return super.sizeThatFits(size)
 	}
 
@@ -110,7 +110,7 @@ open class CheckpointedView: UIView,
 		}
 	}
 
-	nonisolated open func vwDidMoveToSuperview() {
+	open func vwDidMoveToSuperview() {
 		//
 	}
 
@@ -124,7 +124,7 @@ open class CheckpointedView: UIView,
 		}
 	}
 
-	nonisolated open func vwWillMove(toSuperview newSuperview: UIView?) {
+	open func vwWillMove(toSuperview newSuperview: UIView?) {
 		//
 	}
 
@@ -139,7 +139,7 @@ open class CheckpointedView: UIView,
 		}
 	}
 
-	nonisolated open func vwDidMoveToWindow() {
+	open func vwDidMoveToWindow() {
 		//
 	}
 
@@ -153,7 +153,7 @@ open class CheckpointedView: UIView,
 		}
 	}
 
-	nonisolated open func vwWillMove(toWindow newWindow: UIWindow?) {
+	open func vwWillMove(toWindow newWindow: UIWindow?) {
 		//
 	}
 
@@ -174,7 +174,7 @@ open class CheckpointedView: UIView,
 		}
 	}
 
-	nonisolated open func vwPoint(
+	open func vwPoint(
 		inside point: CGPoint,
 		with event: UIEvent?
 	) -> Bool {
@@ -196,7 +196,7 @@ open class CheckpointedView: UIView,
 		}
 	}
 
-	nonisolated open func vwHitTest(
+	open func vwHitTest(
 		_ point: CGPoint,
 		with event: UIEvent?
 	) -> UIView? {
@@ -215,7 +215,7 @@ open class CheckpointedView: UIView,
 		}
 	}
 
-	nonisolated open func vwTraitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+	open func vwTraitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
 		//
 	}
 }

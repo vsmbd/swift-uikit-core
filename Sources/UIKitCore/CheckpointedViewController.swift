@@ -33,7 +33,7 @@ open class CheckpointedViewController: UIViewController,
 		}
 	}
 
-	nonisolated open func initialize() {
+	open func initialize() {
 		//
 	}
 
@@ -59,7 +59,7 @@ open class CheckpointedViewController: UIViewController,
 		}
 	}
 
-	nonisolated open func vcLoadView() {
+	open func vcLoadView() {
 		//
 	}
 
@@ -72,7 +72,7 @@ open class CheckpointedViewController: UIViewController,
 		}
 	}
 
-	nonisolated open func vcViewDidLoad() {
+	open func vcViewDidLoad() {
 		//
 	}
 
@@ -87,7 +87,7 @@ open class CheckpointedViewController: UIViewController,
 		}
 	}
 
-	nonisolated open func vcViewWillAppear(_ animated: Bool) {
+	open func vcViewWillAppear(_ animated: Bool) {
 		//
 	}
 
@@ -100,7 +100,7 @@ open class CheckpointedViewController: UIViewController,
 		}
 	}
 
-	nonisolated open func vcViewDidAppear(_ animated: Bool) {
+	open func vcViewDidAppear(_ animated: Bool) {
 		//
 	}
 
@@ -113,7 +113,7 @@ open class CheckpointedViewController: UIViewController,
 		}
 	}
 
-	nonisolated open func vcViewWillDisappear(_ animated: Bool) {
+	open func vcViewWillDisappear(_ animated: Bool) {
 		//
 	}
 
@@ -126,7 +126,7 @@ open class CheckpointedViewController: UIViewController,
 		}
 	}
 
-	nonisolated open func vcViewDidDisappear(_ animated: Bool) {
+	open func vcViewDidDisappear(_ animated: Bool) {
 		//
 	}
 
@@ -141,7 +141,7 @@ open class CheckpointedViewController: UIViewController,
 		}
 	}
 
-	nonisolated open func vcViewWillLayoutSubviews() {
+	open func vcViewWillLayoutSubviews() {
 		//
 	}
 
@@ -154,7 +154,7 @@ open class CheckpointedViewController: UIViewController,
 		}
 	}
 
-	nonisolated open func vcViewDidLayoutSubviews() {
+	open func vcViewDidLayoutSubviews() {
 		//
 	}
 
@@ -167,7 +167,7 @@ open class CheckpointedViewController: UIViewController,
 		}
 	}
 
-	nonisolated open func vcUpdateViewConstraints() {
+	open func vcUpdateViewConstraints() {
 		//
 	}
 
@@ -189,7 +189,7 @@ open class CheckpointedViewController: UIViewController,
 		}
 	}
 
-	nonisolated open func vcViewWillTransition(
+	open func vcViewWillTransition(
 		to size: CGSize,
 		with coordinator: UIViewControllerTransitionCoordinator
 	) {
@@ -209,7 +209,7 @@ open class CheckpointedViewController: UIViewController,
 	}
 
 	@available(iOS 13.0, *)
-	nonisolated open func vcViewIsAppearing(_ appearing: Bool) {
+	open func vcViewIsAppearing(_ appearing: Bool) {
 		//
 	}
 
@@ -224,7 +224,7 @@ open class CheckpointedViewController: UIViewController,
 		}
 	}
 
-	nonisolated open func vcDidReceiveMemoryWarning() {
+	open func vcDidReceiveMemoryWarning() {
 		//
 	}
 
@@ -240,7 +240,7 @@ open class CheckpointedViewController: UIViewController,
 		}
 	}
 
-	nonisolated open func vcWillMove(toParent parent: UIViewController?) {
+	open func vcWillMove(toParent parent: UIViewController?) {
 		//
 	}
 
@@ -254,7 +254,7 @@ open class CheckpointedViewController: UIViewController,
 		}
 	}
 
-	nonisolated open func vcDidMove(toParent parent: UIViewController?) {
+	open func vcDidMove(toParent parent: UIViewController?) {
 		//
 	}
 
@@ -270,7 +270,7 @@ open class CheckpointedViewController: UIViewController,
 		}
 	}
 
-	nonisolated open func vcTraitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+	open func vcTraitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
 		//
 	}
 }
