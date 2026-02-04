@@ -590,7 +590,7 @@ open class CheckpointedAppDelegate: UIResponder,
 
 	public func application(
 		_ application: UIApplication,
-		shouldSaveApplicationState coder: NSCoder
+		shouldSaveSecureApplicationState coder: NSCoder
 	) -> Bool {
 		let payload = Box((application, coder))
 		return measured { [weak self, payload] in
@@ -598,14 +598,14 @@ open class CheckpointedAppDelegate: UIResponder,
 
 			return app(
 				payload.value.0,
-				shouldSaveApplicationState: payload.value.1
+				shouldSaveSecureApplicationState: payload.value.1
 			)
 		}
 	}
 
 	nonisolated open func app(
 		_ application: UIApplication,
-		shouldSaveApplicationState coder: NSCoder
+		shouldSaveSecureApplicationState coder: NSCoder
 	) -> Bool {
 		return false
 	}
