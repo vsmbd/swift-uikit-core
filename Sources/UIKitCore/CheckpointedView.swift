@@ -15,7 +15,8 @@ import UIKit
 /// Base `UIView` for consistent view lifecycle and checkpointing.
 /// Subclass and override the open `vw...` methods to customize behavior.
 open class CheckpointedView: UIView,
-							 Entity {
+							 Entity,
+							 @unchecked Sendable {
 	// MARK: + Public scope
 
 	public let identifier: UInt64

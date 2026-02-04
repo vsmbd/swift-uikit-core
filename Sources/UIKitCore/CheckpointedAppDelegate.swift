@@ -17,7 +17,8 @@ import UIKit
 /// Subclass to use as your app delegate; the empty callback implementations are not overridable.
 open class CheckpointedAppDelegate: NSObject,
 									UIApplicationDelegate,
-									Entity {
+									Entity,
+									@unchecked Sendable {
 	// MARK: + Public scope
 
 	public let identifier: UInt64
