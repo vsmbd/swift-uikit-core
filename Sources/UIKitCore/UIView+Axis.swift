@@ -47,6 +47,7 @@ public extension UIView {
 		var vertical: NSLayoutConstraint?
 		var horizontal: NSLayoutConstraint?
 
+		@MainActor
 		var activate: Bool = false {
 			didSet {
 				vertical?.isActive = activate

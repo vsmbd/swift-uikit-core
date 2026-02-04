@@ -47,6 +47,7 @@ public extension UIView {
 		var height: NSLayoutConstraint?
 		var width: NSLayoutConstraint?
 
+		@MainActor
 		var activate: Bool = false {
 			didSet {
 				height?.isActive = activate

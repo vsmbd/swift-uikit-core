@@ -67,6 +67,7 @@ public extension UIView {
 		var top: NSLayoutConstraint?
 		var bottom: NSLayoutConstraint?
 
+		@MainActor
 		var activate: Bool = false {
 			didSet {
 				lead?.isActive = activate

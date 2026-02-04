@@ -1,5 +1,5 @@
 {
-  "originHash" : "6ef351f1ea0eaef6ce7df57c1c816f0cd51219ab7713b38a380031eeac5e7a65",
+  "originHash" : "befad805c21d0b32b0d1e8f12b95529e5072a53824ee91c1d480fa971e83f381",
   "pins" : [
     {
       "identity" : "swift-core",
@@ -25,7 +25,7 @@
       "location" : "https://github.com/vsmbd/swift-kvstore.git",
       "state" : {
         "branch" : "main",
-        "revision" : "5e451ea32561de4b08e2da634e946c2666ba783f"
+        "revision" : "77768d82fbd2f0e30951090fb61bde651a3a6957"
       }
     },
     {
@@ -34,7 +34,7 @@
       "location" : "https://github.com/vsmbd/swift-telme.git",
       "state" : {
         "branch" : "main",
-        "revision" : "6559a1111bc2151b51e58693ab0a4a9e286dbe45"
+        "revision" : "b938fdab9ad42f145b168e06b561b32b2a41670b"
       }
     }
   ],

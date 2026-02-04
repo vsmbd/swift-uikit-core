@@ -8,8 +8,10 @@
 #if os(iOS) || os(tvOS)
 
 import CloudKit
+import KVStore
 import SwiftCore
 import UIKit
+import Telme
 
 // MARK: - CheckpointedAppDelegate
 
@@ -19,15 +21,103 @@ open class CheckpointedAppDelegate: NSObject,
 									UIApplicationDelegate,
 									Entity,
 									@unchecked Sendable {
+	// MARK: + Private scope
+
+	private enum Key {
+		static let installId = "installId"
+	}
+
+	private static func getTimeInfo(baseline: TimeBaseline) -> TimeInfo {
+		.init(
+			baselineWall: baseline.wall,
+			baselineMonotonic: baseline.monotonic,
+			timezoneOffsetSeconds: TimeZone.current.offsetSecondsFromUTC
+		)
+	}
+
+	private static func resolveInstallId(_ secureStore: KVStore) -> UUID {
+		func insertNewID() -> UUID {
+			let newId = UUID()
+			_ = secureStore.setString(
+				Key.installId,
+				value: newId.uuidString
+			)
+			return newId
+		}
+
+		let result = secureStore.getString(Key.installId)
+
+		switch result {
+		case .success(let stored, _):
+			if let stored,
+			   let uuid = UUID(uuidString: stored) {
+				return uuid
+			}
+
+			return insertNewID()
+
+		case .failure:
+			return insertNewID()
+		}
+	}
+
+	private static func getAppInfo(installId: UUID) -> AppInfo {
+		let bundle = Bundle.main
+
+		return .init(
+			bundleId: bundle.safeBundleIdentifier,
+			appVersion: bundle.appVersionString,
+			installId: installId
+		)
+	}
+
 	// MARK: + Public scope
 
 	public let identifier: UInt64
 
+	/// UserDefaults-backed store for non-sensitive settings. Exposed as `KVStore` only.
+	public let settingsStore: KVStore
+
+	/// Keychain-backed store for sensitive values. Exposed as `KVStore` only.
+	public let secureStore: KVStore
+
+	public let timeInfo: TimeInfo
+	public let appInfo: AppInfo
+	public let deviceInfo: DeviceInfo
+
+	public let consoleSink = ConsoleRecordSink()
+
 	// MARK: ++ Init
 
 	public override init() {
+		let baseline = timeBaseline
 		self.identifier = Self.nextID
+
+		self.timeInfo = Self.getTimeInfo(baseline: baseline)
+
+		self.settingsStore = SettingsStore()
+
+		let bundle = Bundle.main
+		let secureStore = SecureStore(service: bundle.safeBundleIdentifier)
+		self.secureStore = secureStore
+
+		let resolvedInstallId = Self.resolveInstallId(secureStore)
+		self.appInfo = Self.getAppInfo(installId: resolvedInstallId)
+
+		self.deviceInfo = UIDevice.getDeviceInfo()
+
 		super.init()
+
+		Telme.default.setup(
+			.checkpoint(self),
+			sinks: [consoleSink]
+		)
+
+		initialize()
+	}
+
+	open func initialize() {
+		//
 	}
 
 	// MARK: ++ Launch
