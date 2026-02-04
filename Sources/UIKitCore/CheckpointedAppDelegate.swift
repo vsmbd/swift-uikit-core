@@ -85,8 +85,6 @@ open class CheckpointedAppDelegate: UIResponder,
 	public let appInfo: AppInfo
 	public let deviceInfo: DeviceInfo
 
-	public let consoleSink = ConsoleRecordSink()
-
 	/// The app's key window, if any.
 	/// Falls back to `UIApplication.shared.keyWindow` on iOS 12.
 	open var keyWindow: UIWindow? {
@@ -114,10 +112,7 @@ open class CheckpointedAppDelegate: UIResponder,
 
 		super.init()
 
-		Telme.default.setup(
-			.checkpoint(self),
-			sinks: [consoleSink]
-		)
+		Telme.default.setup(.checkpoint(self))
 
 		measured { [weak self] in
 			guard let self else { return }
