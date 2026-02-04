@@ -143,7 +143,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func initialize() {
+	open func initialize() {
 		//
 	}
 
@@ -164,7 +164,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func app(
+	open func app(
 		_ application: UIApplication,
 		willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
 	) -> Bool {
@@ -186,7 +186,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func app(
+	open func app(
 		_ application: UIApplication,
 		didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
 	) -> Bool {
@@ -204,7 +204,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func appDidBecomeActive(_ application: UIApplication) {
+	open func appDidBecomeActive(_ application: UIApplication) {
 		//
 	}
 
@@ -217,7 +217,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func appWillResignActive(_ application: UIApplication) {
+	open func appWillResignActive(_ application: UIApplication) {
 		//
 	}
 
@@ -230,7 +230,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func appDidEnterBackground(_ application: UIApplication) {
+	open func appDidEnterBackground(_ application: UIApplication) {
 		//
 	}
 
@@ -243,7 +243,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func appWillEnterForeground(_ application: UIApplication) {
+	open func appWillEnterForeground(_ application: UIApplication) {
 		//
 	}
 
@@ -256,7 +256,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func appWillTerminate(_ application: UIApplication) {
+	open func appWillTerminate(_ application: UIApplication) {
 		//
 	}
 
@@ -286,7 +286,7 @@ open class CheckpointedAppDelegate: UIResponder,
 	}
 
 	@available(iOS 13.0, *)
-	nonisolated open func app(
+	open func app(
 		_ application: UIApplication,
 		configurationForConnecting connectingSceneSession: UISceneSession,
 		options: UIScene.ConnectionOptions
@@ -314,7 +314,7 @@ open class CheckpointedAppDelegate: UIResponder,
 	}
 
 	@available(iOS 13.0, *)
-	nonisolated open func app(
+	open func app(
 		_ application: UIApplication,
 		didDiscardSceneSessions sceneSessions: Set<UISceneSession>
 	) {
@@ -338,7 +338,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func app(
+	open func app(
 		_ application: UIApplication,
 		didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
 	) {
@@ -360,7 +360,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func app(
+	open func app(
 		_ application: UIApplication,
 		didFailToRegisterForRemoteNotificationsWithError error: Error
 	) {
@@ -387,7 +387,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func app(
+	open func app(
 		_ application: UIApplication,
 		didReceiveRemoteNotification userInfo: [AnyHashable: Any],
 		fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
@@ -415,7 +415,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func app(
+	open func app(
 		_ application: UIApplication,
 		open url: URL,
 		options: [UIApplication.OpenURLOptionsKey: Any] = [:]
@@ -445,7 +445,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func app(
+	open func app(
 		_ application: UIApplication,
 		handleEventsForBackgroundURLSession identifier: String,
 		completionHandler: @escaping () -> Void
@@ -476,7 +476,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func app(
+	open func app(
 		_ application: UIApplication,
 		performActionFor shortcutItem: UIApplicationShortcutItem,
 		completionHandler: @escaping (Bool) -> Void
@@ -496,7 +496,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func appProtectedDataDidBecomeAvailable(_ application: UIApplication) {
+	open func appProtectedDataDidBecomeAvailable(_ application: UIApplication) {
 		//
 	}
 
@@ -509,7 +509,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func appProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
+	open func appProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
 		//
 	}
 
@@ -530,7 +530,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func app(
+	open func app(
 		_ application: UIApplication,
 		supportedInterfaceOrientationsFor window: UIWindow?
 	) -> UIInterfaceOrientationMask {
@@ -554,7 +554,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func app(
+	open func app(
 		_ application: UIApplication,
 		shouldAllowExtensionPointIdentifier extensionPointIdentifier: UIApplication.ExtensionPointIdentifier
 	) -> Bool {
@@ -580,7 +580,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func app(
+	open func app(
 		_ application: UIApplication,
 		viewControllerWithRestorationIdentifierPath identifierComponents: [String],
 		coder: NSCoder
@@ -603,7 +603,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func app(
+	open func app(
 		_ application: UIApplication,
 		shouldSaveSecureApplicationState coder: NSCoder
 	) -> Bool {
@@ -625,7 +625,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func app(
+	open func app(
 		_ application: UIApplication,
 		shouldRestoreApplicationState coder: NSCoder
 	) -> Bool {
@@ -649,7 +649,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func app(
+	open func app(
 		_ application: UIApplication,
 		willContinueUserActivityWithType userActivityType: String
 	) -> Bool {
@@ -673,7 +673,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func app(
+	open func app(
 		_ application: UIApplication,
 		continue userActivity: NSUserActivity,
 		restorationHandler: @escaping ([any UIUserActivityRestoring]?) -> Void
@@ -696,7 +696,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func app(
+	open func app(
 		_ application: UIApplication,
 		didUpdate userActivity: NSUserActivity
 	) {
@@ -720,7 +720,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func app(
+	open func app(
 		_ application: UIApplication,
 		didFailToContinueUserActivityWithType userActivityType: String,
 		error: Error
@@ -745,7 +745,7 @@ open class CheckpointedAppDelegate: UIResponder,
 		}
 	}
 
-	nonisolated open func app(
+	open func app(
 		_ application: UIApplication,
 		userDidAcceptCloudKitShareWith cloudKitShareMetadata: CKShare.Metadata
 	) {
