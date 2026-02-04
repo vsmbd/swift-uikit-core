@@ -136,10 +136,14 @@ open class CheckpointedAppDelegate: UIResponder,
 			sinks: [consoleSink]
 		)
 
-		initialize()
+		measured { [weak self] in
+			guard let self else { return }
+
+			initialize()
+		}
 	}
 
-	open func initialize() {
+	nonisolated open func initialize() {
 		//
 	}
 
