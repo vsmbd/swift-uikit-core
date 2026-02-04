@@ -11,11 +11,6 @@ import CloudKit
 import SwiftCore
 import UIKit
 
-private final class Box<T>: @unchecked Sendable {
-	let value: T
-	init(_ value: T) { self.value = value }
-}
-
 // MARK: - CheckpointedAppDelegate
 
 /// Base `UIApplicationDelegate` for consistent app lifecycle and session baselining.
