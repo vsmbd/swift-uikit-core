@@ -13,7 +13,6 @@ import SwiftCore
 
 @Suite("TimeInfo")
 struct TimeInfoTests {
-
 	@Test
 	func initStoresValues() {
 		let wall = WallNanostamp(unixEpochNanoseconds: 1_000_000_000_000_000_000)

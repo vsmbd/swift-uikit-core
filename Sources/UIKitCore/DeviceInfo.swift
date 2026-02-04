@@ -17,6 +17,8 @@ public struct DeviceInfo: Codable,
 						  Sendable,
 						  Equatable,
 						  Hashable {
+	// MARK: + Public scope
+
 	public let osName: String
 	public let osVersion: String
 	public let hardwareModel: String

@@ -21,6 +21,8 @@ public struct TimeInfo: Codable,
 						Sendable,
 						Equatable,
 						Hashable {
+	// MARK: + Public scope
+
 	/// Wall-clock time (Unix epoch UTC) captured at baseline.
 	public let baselineWall: WallNanostamp
 	/// Monotonic time captured at the same instant as `baselineWall`.

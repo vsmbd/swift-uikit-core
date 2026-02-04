@@ -15,6 +15,8 @@ public struct AppInfo: Codable,
 					   Sendable,
 					   Equatable,
 					   Hashable {
+	// MARK: + Public scope
+
 	public let bundleId: String
 	public let appVersion: String
 	public let installId: UUID
