@@ -1,5 +1,5 @@
 {
-  "originHash" : "befad805c21d0b32b0d1e8f12b95529e5072a53824ee91c1d480fa971e83f381",
+  "originHash" : "52167dba28c669ebdbab5ec2164dc09dbc8db63a46b78fe40edd71b33ec2068c",
   "pins" : [
     {
       "identity" : "swift-core",
@@ -34,7 +34,7 @@
       "location" : "https://github.com/vsmbd/swift-telme.git",
       "state" : {
         "branch" : "main",
-        "revision" : "b938fdab9ad42f145b168e06b561b32b2a41670b"
+        "revision" : "d1d877213595172fbaa8e841a3b2198ce07ce0f5"
       }
     }
   ],
