@@ -1,0 +1,42 @@
+{
+  "originHash" : "0c46264662c61dfc7df23b639e7863e8480c3605b8b729708e7af1a9670cdaa5",
+  "pins" : [
+    {
+      "identity" : "swift-core",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vsmbd/swift-core.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "6bc2c5ac4308d20b5a070432a5d6f58167dfcca0"
+      }
+    },
+    {
+      "identity" : "swift-eventdispatch",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vsmbd/swift-eventdispatch.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "947495d813232f1a44aabcc55a2babf7c9165caf"
+      }
+    },
+    {
+      "identity" : "swift-kvstore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vsmbd/swift-kvstore.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "bb764d49f8badd08c440300fa3cfaa5baf106527"
+      }
+    },
+    {
+      "identity" : "swift-telme",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vsmbd/swift-telme.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "9ddd1e084a1c05893a99ac34a1b0d9b9707c25f0"
+      }
+    }
+  ],
+  "version" : 3
+}
