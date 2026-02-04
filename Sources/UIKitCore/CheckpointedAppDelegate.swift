@@ -81,6 +81,7 @@ open class CheckpointedAppDelegate: UIResponder,
 	/// Keychain-backed store for sensitive values. Exposed as `KVStore` only.
 	public let secureStore: KVStore
 
+	public let sessionId: UUID = .init()
 	public let timeInfo: TimeInfo
 	public let appInfo: AppInfo
 	public let deviceInfo: DeviceInfo
