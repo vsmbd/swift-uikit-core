@@ -85,11 +85,7 @@ open class CheckpointedAppDelegate: UIResponder,
 	public let appInfo: AppInfo
 	public let deviceInfo: DeviceInfo
 
-	/// The app's key window, if any.
-	/// Falls back to `UIApplication.shared.keyWindow` on iOS 12.
-	open var keyWindow: UIWindow? {
-		UIApplication.shared.keyWindow
-	}
+	open var window: UIWindow?
 
 	// MARK: ++ Init
 

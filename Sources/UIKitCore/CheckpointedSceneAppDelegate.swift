@@ -20,7 +20,7 @@ open class CheckpointedSceneAppDelegate: CheckpointedAppDelegate,
 										 @unchecked Sendable {
 	/// The app's key window, if any.
 	/// Uses the foreground active scene on iOS 13+
-	open override var keyWindow: UIWindow? {
+	open var keyWindow: UIWindow? {
 		let scenes = UIApplication.shared
 			.connectedScenes
 			.compactMap { $0 as? UIWindowScene }
