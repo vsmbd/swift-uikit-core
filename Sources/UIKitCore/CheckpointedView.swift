@@ -25,11 +25,19 @@ open class CheckpointedView: UIView,
 	public override init(frame: CGRect) {
 		self.identifier = Self.nextID
 		super.init(frame: frame)
+		measured { [weak self] in
+			guard let self else { return }
+
+			initialize()
+		}
+	}
+
+	nonisolated open func initialize() {
+		//
 	}
 
 	public required init?(coder: NSCoder) {
-		self.identifier = Self.nextID
-		super.init(coder: coder)
+		fatalError("CheckpointedView must be instantiated programmatically (init(frame:))")
 	}
 
 	// MARK: ++ Layout

@@ -22,20 +22,29 @@ open class CheckpointedViewController: UIViewController,
 
 	// MARK: ++ Init
 
+	public init() {
+		self.identifier = Self.nextID
+		super.init(nibName: nil, bundle: nil)
+		measured { [weak self] in
+			guard let self else { return }
+
+			initialize()
+		}
+	}
+
+	nonisolated open func initialize() {
+		//
+	}
+
 	public override init(
 		nibName nibNameOrNil: String?,
 		bundle nibBundleOrNil: Bundle?
 	) {
-		self.identifier = Self.nextID
-		super.init(
-			nibName: nibNameOrNil,
-			bundle: nibBundleOrNil
-		)
+		fatalError("CheckpointedViewController must be instantiated programmatically (init())")
 	}
 
 	public required init?(coder: NSCoder) {
-		self.identifier = Self.nextID
-		super.init(coder: coder)
+		fatalError("CheckpointedViewController must be instantiated programmatically (init())")
 	}
 
 	// MARK: ++ View loading
