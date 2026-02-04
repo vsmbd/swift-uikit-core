@@ -88,27 +88,10 @@ open class CheckpointedAppDelegate: UIResponder,
 	public let consoleSink = ConsoleRecordSink()
 
 	/// The app's key window, if any.
-	/// Uses the foreground active scene on iOS 13+
 	/// Falls back to `UIApplication.shared.keyWindow` on iOS 12.
-	open var keyWindow: UIWindow? = {
-		if #available(iOS 13.0, *) {
-			let scenes = UIApplication.shared
-				.connectedScenes
-				.compactMap { $0 as? UIWindowScene }
-
-			if #available(iOS 15.0, *) {
-				return scenes
-					.first { $0.activationState == .foregroundActive }?
-					.keyWindow
-				?? scenes.first?.keyWindow
-			} else {
-				return scenes.flatMap(\.windows)
-					.first(where: \.isKeyWindow)
-			}
-		} else {
-			return UIApplication.shared.keyWindow
-		}
-	}()
+	open var keyWindow: UIWindow? {
+		UIApplication.shared.keyWindow
+	}
 
 	// MARK: ++ Init
 
@@ -257,67 +240,6 @@ open class CheckpointedAppDelegate: UIResponder,
 	}
 
 	open func appWillTerminate(_ application: UIApplication) {
-		//
-	}
-
-	// MARK: ++ Scenes (iOS 13+)
-
-	@available(iOS 13.0, *)
-	public func application(
-		_ application: UIApplication,
-		configurationForConnecting connectingSceneSession: UISceneSession,
-		options: UIScene.ConnectionOptions
-	) -> UISceneConfiguration {
-		let payload = Box((application, connectingSceneSession, options))
-		return measured { [weak self, payload] in
-			guard let self else {
-				return UISceneConfiguration(
-					name: "Default Configuration",
-					sessionRole: payload.value.1.role
-				)
-			}
-
-			return app(
-				payload.value.0,
-				configurationForConnecting: payload.value.1,
-				options: payload.value.2
-			)
-		}
-	}
-
-	@available(iOS 13.0, *)
-	open func app(
-		_ application: UIApplication,
-		configurationForConnecting connectingSceneSession: UISceneSession,
-		options: UIScene.ConnectionOptions
-	) -> UISceneConfiguration {
-		UISceneConfiguration(
-			name: "Default Configuration",
-			sessionRole: connectingSceneSession.role
-		)
-	}
-
-	@available(iOS 13.0, *)
-	public func application(
-		_ application: UIApplication,
-		didDiscardSceneSessions sceneSessions: Set<UISceneSession>
-	) {
-		let payload = Box((application, sceneSessions))
-		measured { [weak self, payload] in
-			guard let self else { return }
-
-			app(
-				payload.value.0,
-				didDiscardSceneSessions: payload.value.1
-			)
-		}
-	}
-
-	@available(iOS 13.0, *)
-	open func app(
-		_ application: UIApplication,
-		didDiscardSceneSessions sceneSessions: Set<UISceneSession>
-	) {
 		//
 	}
 
