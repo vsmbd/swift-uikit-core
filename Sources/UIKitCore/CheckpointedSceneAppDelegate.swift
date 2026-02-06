@@ -43,16 +43,11 @@ open class CheckpointedSceneAppDelegate: CheckpointedAppDelegate,
 		configurationForConnecting connectingSceneSession: UISceneSession,
 		options: UIScene.ConnectionOptions
 	) -> UISceneConfiguration {
-		let payload = Box((application, connectingSceneSession, options))
-		return measured { [weak self, payload] in
-			guard let self else {
-				fatalError("Application delegate deallocated")
-			}
-
-			return app(
-				payload.value.0,
-				configurationForConnecting: payload.value.1,
-				options: payload.value.2
+		measured {
+			app(
+				application,
+				configurationForConnecting: connectingSceneSession,
+				options: options
 			)
 		}
 	}
@@ -69,13 +64,10 @@ open class CheckpointedSceneAppDelegate: CheckpointedAppDelegate,
 		_ application: UIApplication,
 		didDiscardSceneSessions sceneSessions: Set<UISceneSession>
 	) {
-		let payload = Box((application, sceneSessions))
-		measured { [weak self, payload] in
-			guard let self else { return }
-
+		measured {
 			app(
-				payload.value.0,
-				didDiscardSceneSessions: payload.value.1
+				application,
+				didDiscardSceneSessions: sceneSessions
 			)
 		}
 	}

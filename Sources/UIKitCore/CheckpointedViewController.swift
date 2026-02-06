@@ -25,10 +25,11 @@ open class CheckpointedViewController: UIViewController,
 
 	public init() {
 		self.identifier = Self.nextID
-		super.init(nibName: nil, bundle: nil)
-		measured { [weak self] in
-			guard let self else { return }
-
+		super.init(
+			nibName: nil,
+			bundle: nil
+		)
+		measured {
 			initialize()
 		}
 	}
@@ -52,9 +53,7 @@ open class CheckpointedViewController: UIViewController,
 
 	public override func loadView() {
 		super.loadView()
-		measured { [weak self] in
-			guard let self else { return }
-
+		measured {
 			vcLoadView()
 		}
 	}
@@ -65,9 +64,7 @@ open class CheckpointedViewController: UIViewController,
 
 	public override func viewDidLoad() {
 		super.viewDidLoad()
-		measured { [weak self] in
-			guard let self else { return }
-
+		measured {
 			vcViewDidLoad()
 		}
 	}
@@ -80,9 +77,7 @@ open class CheckpointedViewController: UIViewController,
 
 	public override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		measured { [weak self] in
-			guard let self else { return }
-
+		measured {
 			vcViewWillAppear(animated)
 		}
 	}
@@ -93,9 +88,7 @@ open class CheckpointedViewController: UIViewController,
 
 	public override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		measured { [weak self] in
-			guard let self else { return }
-
+		measured {
 			vcViewDidAppear(animated)
 		}
 	}
@@ -106,9 +99,7 @@ open class CheckpointedViewController: UIViewController,
 
 	public override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
-		measured { [weak self] in
-			guard let self else { return }
-
+		measured {
 			vcViewWillDisappear(animated)
 		}
 	}
@@ -119,9 +110,7 @@ open class CheckpointedViewController: UIViewController,
 
 	public override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
-		measured { [weak self] in
-			guard let self else { return }
-
+		measured {
 			vcViewDidDisappear(animated)
 		}
 	}
@@ -134,9 +123,7 @@ open class CheckpointedViewController: UIViewController,
 
 	public override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
-		measured { [weak self] in
-			guard let self else { return }
-
+		measured {
 			vcViewWillLayoutSubviews()
 		}
 	}
@@ -147,9 +134,7 @@ open class CheckpointedViewController: UIViewController,
 
 	public override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
-		measured { [weak self] in
-			guard let self else { return }
-
+		measured {
 			vcViewDidLayoutSubviews()
 		}
 	}
@@ -160,9 +145,7 @@ open class CheckpointedViewController: UIViewController,
 
 	public override func updateViewConstraints() {
 		super.updateViewConstraints()
-		measured { [weak self] in
-			guard let self else { return }
-
+		measured {
 			vcUpdateViewConstraints()
 		}
 	}
@@ -178,13 +161,10 @@ open class CheckpointedViewController: UIViewController,
 		with coordinator: UIViewControllerTransitionCoordinator
 	) {
 		super.viewWillTransition(to: size, with: coordinator)
-		let payload = Box((size, coordinator))
-		measured { [weak self, payload] in
-			guard let self else { return }
-
+		measured {
 			vcViewWillTransition(
-				to: payload.value.0,
-				with: payload.value.1
+				to: size,
+				with: coordinator
 			)
 		}
 	}
@@ -201,9 +181,7 @@ open class CheckpointedViewController: UIViewController,
 	@available(iOS 13.0, *)
 	public override func viewIsAppearing(_ appearing: Bool) {
 		super.viewIsAppearing(appearing)
-		measured { [weak self] in
-			guard let self else { return }
-
+		measured {
 			vcViewIsAppearing(appearing)
 		}
 	}
@@ -217,9 +195,7 @@ open class CheckpointedViewController: UIViewController,
 
 	public override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
-		measured { [weak self] in
-			guard let self else { return }
-
+		measured {
 			vcDidReceiveMemoryWarning()
 		}
 	}
@@ -232,11 +208,8 @@ open class CheckpointedViewController: UIViewController,
 
 	public override func willMove(toParent parent: UIViewController?) {
 		super.willMove(toParent: parent)
-		let parentBox = Box(parent)
-		measured { [weak self, parentBox] in
-			guard let self else { return }
-
-			vcWillMove(toParent: parentBox.value)
+		measured {
+			vcWillMove(toParent: parent)
 		}
 	}
 
@@ -246,11 +219,8 @@ open class CheckpointedViewController: UIViewController,
 
 	public override func didMove(toParent parent: UIViewController?) {
 		super.didMove(toParent: parent)
-		let parentBox = Box(parent)
-		measured { [weak self, parentBox] in
-			guard let self else { return }
-
-			vcDidMove(toParent: parentBox.value)
+		measured {
+			vcDidMove(toParent: parent)
 		}
 	}
 
@@ -262,11 +232,8 @@ open class CheckpointedViewController: UIViewController,
 
 	public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
 		super.traitCollectionDidChange(previousTraitCollection)
-		let traitBox = Box(previousTraitCollection)
-		measured { [weak self, traitBox] in
-			guard let self else { return }
-
-			vcTraitCollectionDidChange(traitBox.value)
+		measured {
+			vcTraitCollectionDidChange(previousTraitCollection)
 		}
 	}
 

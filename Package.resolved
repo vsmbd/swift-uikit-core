@@ -7,7 +7,7 @@
       "location" : "https://github.com/vsmbd/swift-core.git",
       "state" : {
         "branch" : "main",
-        "revision" : "97d19cbd3d193c8feee8e41e84f017f6800d05bb"
+        "revision" : "adaffffaf219c6149268f2bfa02512aeb2da841f"
       }
     },
     {
@@ -16,7 +16,7 @@
       "location" : "https://github.com/vsmbd/swift-eventdispatch.git",
       "state" : {
         "branch" : "main",
-        "revision" : "86e5edee42429f41847ca2a2795104e37bf8b84f"
+        "revision" : "36c4083118d35100ea86f411a61330a9b745bfa3"
       }
     },
     {
@@ -25,7 +25,7 @@
       "location" : "https://github.com/vsmbd/swift-kvstore.git",
       "state" : {
         "branch" : "main",
-        "revision" : "97e21b25cd3fe9be24ea5d4eaf8d5b4589c3bf76"
+        "revision" : "65d12e13893f0c8bf47c9770ba1f753ec1032032"
       }
     },
     {
@@ -34,7 +34,7 @@
       "location" : "https://github.com/vsmbd/swift-telme.git",
       "state" : {
         "branch" : "main",
-        "revision" : "12014ee1acc3b32cca75963575b5a52fe7c04d04"
+        "revision" : "baa99e69ec87d95dab8a10f0775c7633c8872b20"
       }
     }
   ],

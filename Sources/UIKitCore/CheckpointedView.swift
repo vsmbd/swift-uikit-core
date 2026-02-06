@@ -26,9 +26,7 @@ open class CheckpointedView: UIView,
 	public override init(frame: CGRect) {
 		self.identifier = Self.nextID
 		super.init(frame: frame)
-		measured { [weak self] in
-			guard let self else { return }
-
+		measured {
 			initialize()
 		}
 	}
@@ -45,9 +43,7 @@ open class CheckpointedView: UIView,
 
 	public override func layoutSubviews() {
 		super.layoutSubviews()
-		measured { [weak self] in
-			guard let self else { return }
-
+		measured {
 			vwLayoutSubviews()
 		}
 	}
@@ -58,9 +54,7 @@ open class CheckpointedView: UIView,
 
 	public override func updateConstraints() {
 		super.updateConstraints()
-		measured { [weak self] in
-			guard let self else { return }
-
+		measured {
 			vwUpdateConstraints()
 		}
 	}
@@ -73,9 +67,7 @@ open class CheckpointedView: UIView,
 
 	public override func draw(_ rect: CGRect) {
 		super.draw(rect)
-		measured { [weak self] in
-			guard let self else { return }
-
+		measured {
 			vwDraw(rect)
 		}
 	}
@@ -87,11 +79,8 @@ open class CheckpointedView: UIView,
 	// MARK: ++ Sizing
 
 	public override func sizeThatFits(_ size: CGSize) -> CGSize {
-		let base = super.sizeThatFits(size)
-		return measured { [weak self] in
-			guard let self else { return base }
-
-			return vwSizeThatFits(size)
+		measured {
+			vwSizeThatFits(size)
 		}
 	}
 
@@ -103,9 +92,7 @@ open class CheckpointedView: UIView,
 
 	public override func didMoveToSuperview() {
 		super.didMoveToSuperview()
-		measured { [weak self] in
-			guard let self else { return }
-
+		measured {
 			vwDidMoveToSuperview()
 		}
 	}
@@ -116,11 +103,8 @@ open class CheckpointedView: UIView,
 
 	public override func willMove(toSuperview newSuperview: UIView?) {
 		super.willMove(toSuperview: newSuperview)
-		let superviewBox = Box(newSuperview)
-		measured { [weak self, superviewBox] in
-			guard let self else { return }
-
-			vwWillMove(toSuperview: superviewBox.value)
+		measured {
+			vwWillMove(toSuperview: newSuperview)
 		}
 	}
 
@@ -132,9 +116,7 @@ open class CheckpointedView: UIView,
 
 	public override func didMoveToWindow() {
 		super.didMoveToWindow()
-		measured { [weak self] in
-			guard let self else { return }
-
+		measured {
 			vwDidMoveToWindow()
 		}
 	}
@@ -145,11 +127,8 @@ open class CheckpointedView: UIView,
 
 	public override func willMove(toWindow newWindow: UIWindow?) {
 		super.willMove(toWindow: newWindow)
-		let windowBox = Box(newWindow)
-		measured { [weak self, windowBox] in
-			guard let self else { return }
-
-			vwWillMove(toWindow: windowBox.value)
+		measured {
+			vwWillMove(toWindow: newWindow)
 		}
 	}
 
@@ -163,13 +142,10 @@ open class CheckpointedView: UIView,
 		inside point: CGPoint,
 		with event: UIEvent?
 	) -> Bool {
-		let payload = Box((point, event))
-		return measured { [weak self, payload] in
-			guard let self else { return false }
-
-			return vwPoint(
-				inside: payload.value.0,
-				with: payload.value.1
+		measured {
+			vwPoint(
+				inside: point,
+				with: event
 			)
 		}
 	}
@@ -185,13 +161,10 @@ open class CheckpointedView: UIView,
 		_ point: CGPoint,
 		with event: UIEvent?
 	) -> UIView? {
-		let payload = Box((point, event))
-		return measured { [weak self, payload] in
-			guard let self else { return nil }
-
-			return vwHitTest(
-				payload.value.0,
-				with: payload.value.1
+		measured {
+			vwHitTest(
+				point,
+				with: event
 			)
 		}
 	}
@@ -207,11 +180,8 @@ open class CheckpointedView: UIView,
 
 	public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
 		super.traitCollectionDidChange(previousTraitCollection)
-		let traitBox = Box(previousTraitCollection)
-		measured { [weak self, traitBox] in
-			guard let self else { return }
-
-			vwTraitCollectionDidChange(traitBox.value)
+		measured {
+			vwTraitCollectionDidChange(previousTraitCollection)
 		}
 	}
 

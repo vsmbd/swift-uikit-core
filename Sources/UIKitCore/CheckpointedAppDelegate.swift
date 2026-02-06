@@ -111,9 +111,7 @@ open class CheckpointedAppDelegate: UIResponder,
 
 		Telme.default.setup(.checkpoint(self))
 
-		measured { [weak self] in
-			guard let self else { return }
-
+		measured {
 			initialize()
 		}
 	}
@@ -128,13 +126,10 @@ open class CheckpointedAppDelegate: UIResponder,
 		_ application: UIApplication,
 		willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
 	) -> Bool {
-		let payload = Box((application, launchOptions))
-		return measured { [weak self, payload] in
-			guard let self else { return true }
-
-			return app(
-				payload.value.0,
-				willFinishLaunchingWithOptions: payload.value.1
+		measured {
+			app(
+				application,
+				willFinishLaunchingWithOptions: launchOptions
 			)
 		}
 	}
@@ -150,13 +145,10 @@ open class CheckpointedAppDelegate: UIResponder,
 		_ application: UIApplication,
 		didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
 	) -> Bool {
-		let payload = Box((application, launchOptions))
-		return measured { [weak self, payload] in
-			guard let self else { return true }
-
-			return app(
-				payload.value.0,
-				didFinishLaunchingWithOptions: payload.value.1
+		measured {
+			app(
+				application,
+				didFinishLaunchingWithOptions: launchOptions
 			)
 		}
 	}
@@ -171,11 +163,8 @@ open class CheckpointedAppDelegate: UIResponder,
 	// MARK: ++ Lifecycle
 
 	public func applicationDidBecomeActive(_ application: UIApplication) {
-		let applicationBox = Box(application)
-		measured { [weak self, applicationBox] in
-			guard let self else { return }
-
-			appDidBecomeActive(applicationBox.value)
+		measured {
+			appDidBecomeActive(application)
 		}
 	}
 
@@ -184,11 +173,8 @@ open class CheckpointedAppDelegate: UIResponder,
 	}
 
 	public func applicationWillResignActive(_ application: UIApplication) {
-		let applicationBox = Box(application)
-		measured { [weak self, applicationBox] in
-			guard let self else { return }
-
-			appWillResignActive(applicationBox.value)
+		measured {
+			appWillResignActive(application)
 		}
 	}
 
@@ -197,11 +183,8 @@ open class CheckpointedAppDelegate: UIResponder,
 	}
 
 	public func applicationDidEnterBackground(_ application: UIApplication) {
-		let applicationBox = Box(application)
-		measured { [weak self, applicationBox] in
-			guard let self else { return }
-
-			appDidEnterBackground(applicationBox.value)
+		measured {
+			appDidEnterBackground(application)
 		}
 	}
 
@@ -210,11 +193,8 @@ open class CheckpointedAppDelegate: UIResponder,
 	}
 
 	public func applicationWillEnterForeground(_ application: UIApplication) {
-		let applicationBox = Box(application)
-		measured { [weak self, applicationBox] in
-			guard let self else { return }
-
-			appWillEnterForeground(applicationBox.value)
+		measured {
+			appWillEnterForeground(application)
 		}
 	}
 
@@ -223,11 +203,8 @@ open class CheckpointedAppDelegate: UIResponder,
 	}
 
 	public func applicationWillTerminate(_ application: UIApplication) {
-		let applicationBox = Box(application)
-		measured { [weak self, applicationBox] in
-			guard let self else { return }
-
-			appWillTerminate(applicationBox.value)
+		measured {
+			appWillTerminate(application)
 		}
 	}
 
@@ -241,13 +218,10 @@ open class CheckpointedAppDelegate: UIResponder,
 		_ application: UIApplication,
 		didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
 	) {
-		let payload = Box((application, deviceToken))
-		measured { [weak self, payload] in
-			guard let self else { return }
-
+		measured {
 			app(
-				payload.value.0,
-				didRegisterForRemoteNotificationsWithDeviceToken: payload.value.1
+				application,
+				didRegisterForRemoteNotificationsWithDeviceToken: deviceToken
 			)
 		}
 	}
@@ -263,13 +237,10 @@ open class CheckpointedAppDelegate: UIResponder,
 		_ application: UIApplication,
 		didFailToRegisterForRemoteNotificationsWithError error: Error
 	) {
-		let payload = Box((application, error))
-		measured { [weak self, payload] in
-			guard let self else { return }
-
+		measured {
 			app(
-				payload.value.0,
-				didFailToRegisterForRemoteNotificationsWithError: payload.value.1
+				application,
+				didFailToRegisterForRemoteNotificationsWithError: error
 			)
 		}
 	}
@@ -286,17 +257,11 @@ open class CheckpointedAppDelegate: UIResponder,
 		didReceiveRemoteNotification userInfo: [AnyHashable: Any],
 		fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
 	) {
-		let payload = Box((application, userInfo, completionHandler))
-		measured { [weak self, payload] in
-			guard let self else {
-				payload.value.2(.noData)
-				return
-			}
-
+		measured {
 			app(
-				payload.value.0,
-				didReceiveRemoteNotification: payload.value.1,
-				fetchCompletionHandler: payload.value.2
+				application,
+				didReceiveRemoteNotification: userInfo,
+				fetchCompletionHandler: completionHandler
 			)
 		}
 	}
@@ -317,14 +282,11 @@ open class CheckpointedAppDelegate: UIResponder,
 		open url: URL,
 		options: [UIApplication.OpenURLOptionsKey: Any] = [:]
 	) -> Bool {
-		let payload = Box((application, url, options))
-		return measured { [weak self, payload] in
-			guard let self else { return false }
-
-			return app(
-				payload.value.0,
-				open: payload.value.1,
-				options: payload.value.2
+		measured {
+			app(
+				application,
+				open: url,
+				options: options
 			)
 		}
 	}
@@ -344,17 +306,11 @@ open class CheckpointedAppDelegate: UIResponder,
 		handleEventsForBackgroundURLSession identifier: String,
 		completionHandler: @escaping () -> Void
 	) {
-		let payload = Box((application, identifier, completionHandler))
-		measured { [weak self, payload] in
-			guard let self else {
-				payload.value.2()
-				return
-			}
-
+		measured {
 			app(
-				payload.value.0,
-				handleEventsForBackgroundURLSession: payload.value.1,
-				completionHandler: payload.value.2
+				application,
+				handleEventsForBackgroundURLSession: identifier,
+				completionHandler: completionHandler
 			)
 		}
 	}
@@ -375,17 +331,11 @@ open class CheckpointedAppDelegate: UIResponder,
 		performActionFor shortcutItem: UIApplicationShortcutItem,
 		completionHandler: @escaping (Bool) -> Void
 	) {
-		let payload = Box((application, shortcutItem, completionHandler))
-		measured { [weak self, payload] in
-			guard let self else {
-				payload.value.2(false)
-				return
-			}
-
+		measured {
 			app(
-				payload.value.0,
-				performActionFor: payload.value.1,
-				completionHandler: payload.value.2
+				application,
+				performActionFor: shortcutItem,
+				completionHandler: completionHandler
 			)
 		}
 	}
@@ -402,11 +352,8 @@ open class CheckpointedAppDelegate: UIResponder,
 	// MARK: ++ Protected data
 
 	public func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
-		let applicationBox = Box(application)
-		measured { [weak self, applicationBox] in
-			guard let self else { return }
-
-			appProtectedDataDidBecomeAvailable(applicationBox.value)
+		measured {
+			appProtectedDataDidBecomeAvailable(application)
 		}
 	}
 
@@ -415,11 +362,8 @@ open class CheckpointedAppDelegate: UIResponder,
 	}
 
 	public func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
-		let applicationBox = Box(application)
-		measured { [weak self, applicationBox] in
-			guard let self else { return }
-
-			appProtectedDataWillBecomeUnavailable(applicationBox.value)
+		measured {
+			appProtectedDataWillBecomeUnavailable(application)
 		}
 	}
 
@@ -433,13 +377,10 @@ open class CheckpointedAppDelegate: UIResponder,
 		_ application: UIApplication,
 		supportedInterfaceOrientationsFor window: UIWindow?
 	) -> UIInterfaceOrientationMask {
-		let payload = Box((application, window))
-		return measured { [weak self, payload] in
-			guard let self else { return .all }
-
-			return app(
-				payload.value.0,
-				supportedInterfaceOrientationsFor: payload.value.1
+		measured {
+			app(
+				application,
+				supportedInterfaceOrientationsFor: window
 			)
 		}
 	}
@@ -457,13 +398,10 @@ open class CheckpointedAppDelegate: UIResponder,
 		_ application: UIApplication,
 		shouldAllowExtensionPointIdentifier extensionPointIdentifier: UIApplication.ExtensionPointIdentifier
 	) -> Bool {
-		let payload = Box((application, extensionPointIdentifier))
-		return measured { [weak self, payload] in
-			guard let self else { return true }
-
-			return app(
-				payload.value.0,
-				shouldAllowExtensionPointIdentifier: payload.value.1
+		measured {
+			app(
+				application,
+				shouldAllowExtensionPointIdentifier: extensionPointIdentifier
 			)
 		}
 	}
@@ -482,14 +420,11 @@ open class CheckpointedAppDelegate: UIResponder,
 		viewControllerWithRestorationIdentifierPath identifierComponents: [String],
 		coder: NSCoder
 	) -> UIViewController? {
-		let payload = Box((application, identifierComponents, coder))
-		return measured { [weak self, payload] in
-			guard let self else { return nil }
-
-			return app(
-				payload.value.0,
-				viewControllerWithRestorationIdentifierPath: payload.value.1,
-				coder: payload.value.2
+		measured {
+			app(
+				application,
+				viewControllerWithRestorationIdentifierPath: identifierComponents,
+				coder: coder
 			)
 		}
 	}
@@ -506,13 +441,10 @@ open class CheckpointedAppDelegate: UIResponder,
 		_ application: UIApplication,
 		shouldSaveSecureApplicationState coder: NSCoder
 	) -> Bool {
-		let payload = Box((application, coder))
-		return measured { [weak self, payload] in
-			guard let self else { return false }
-
-			return app(
-				payload.value.0,
-				shouldSaveSecureApplicationState: payload.value.1
+		measured {
+			app(
+				application,
+				shouldSaveSecureApplicationState: coder
 			)
 		}
 	}
@@ -528,13 +460,10 @@ open class CheckpointedAppDelegate: UIResponder,
 		_ application: UIApplication,
 		shouldRestoreApplicationState coder: NSCoder
 	) -> Bool {
-		let payload = Box((application, coder))
-		return measured { [weak self, payload] in
-			guard let self else { return false }
-
-			return app(
-				payload.value.0,
-				shouldRestoreApplicationState: payload.value.1
+		measured {
+			app(
+				application,
+				shouldRestoreApplicationState: coder
 			)
 		}
 	}
@@ -552,13 +481,10 @@ open class CheckpointedAppDelegate: UIResponder,
 		_ application: UIApplication,
 		willContinueUserActivityWithType userActivityType: String
 	) -> Bool {
-		let payload = Box((application, userActivityType))
-		return measured { [weak self, payload] in
-			guard let self else { return false }
-
-			return app(
-				payload.value.0,
-				willContinueUserActivityWithType: payload.value.1
+		measured {
+			app(
+				application,
+				willContinueUserActivityWithType: userActivityType
 			)
 		}
 	}
@@ -575,14 +501,11 @@ open class CheckpointedAppDelegate: UIResponder,
 		continue userActivity: NSUserActivity,
 		restorationHandler: @escaping ([any UIUserActivityRestoring]?) -> Void
 	) -> Bool {
-		let payload = Box((application, userActivity, restorationHandler))
-		return measured { [weak self, payload] in
-			guard let self else { return false }
-
-			return app(
-				payload.value.0,
-				continue: payload.value.1,
-				restorationHandler: payload.value.2
+		measured {
+			app(
+				application,
+				continue: userActivity,
+				restorationHandler: restorationHandler
 			)
 		}
 	}
@@ -599,13 +522,10 @@ open class CheckpointedAppDelegate: UIResponder,
 		_ application: UIApplication,
 		didUpdate userActivity: NSUserActivity
 	) {
-		let payload = Box((application, userActivity))
-		measured { [weak self, payload] in
-			guard let self else { return }
-
+		measured {
 			app(
-				payload.value.0,
-				didUpdate: payload.value.1
+				application,
+				didUpdate: userActivity
 			)
 		}
 	}
@@ -622,14 +542,11 @@ open class CheckpointedAppDelegate: UIResponder,
 		didFailToContinueUserActivityWithType userActivityType: String,
 		error: Error
 	) {
-		let payload = Box((application, userActivityType, error))
-		measured { [weak self, payload] in
-			guard let self else { return }
-
+		measured {
 			app(
-				payload.value.0,
-				didFailToContinueUserActivityWithType: payload.value.1,
-				error: payload.value.2
+				application,
+				didFailToContinueUserActivityWithType: userActivityType,
+				error: error
 			)
 		}
 	}
@@ -648,13 +565,10 @@ open class CheckpointedAppDelegate: UIResponder,
 		_ application: UIApplication,
 		userDidAcceptCloudKitShareWith cloudKitShareMetadata: CKShare.Metadata
 	) {
-		let payload = Box((application, cloudKitShareMetadata))
-		measured { [weak self, payload] in
-			guard let self else { return }
-
+		measured {
 			app(
-				payload.value.0,
-				userDidAcceptCloudKitShareWith: payload.value.1
+				application,
+				userDidAcceptCloudKitShareWith: cloudKitShareMetadata
 			)
 		}
 	}
