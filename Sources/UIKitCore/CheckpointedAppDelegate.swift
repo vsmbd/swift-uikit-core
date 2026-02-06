@@ -19,8 +19,7 @@ import Telme
 /// Subclass to use as your app delegate; the empty callback implementations are not overridable.
 open class CheckpointedAppDelegate: UIResponder,
 									UIApplicationDelegate,
-									Entity,
-									@unchecked Sendable {
+									Entity {
 	// MARK: + Private scope
 
 	private enum Key {

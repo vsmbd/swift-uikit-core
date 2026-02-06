@@ -16,8 +16,7 @@ import Telme
 // MARK: - CheckpointedSceneAppDelegate
 
 @available(iOS 13.0, *)
-open class CheckpointedSceneAppDelegate: CheckpointedAppDelegate,
-										 @unchecked Sendable {
+open class CheckpointedSceneAppDelegate: CheckpointedAppDelegate {
 	/// The app's key window, if any.
 	/// Uses the foreground active scene on iOS 13+
 	open var keyWindow: UIWindow? {

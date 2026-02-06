@@ -61,7 +61,7 @@ public extension UIView {
 		}
 	}
 
-	struct EdgeConstraints: @unchecked Sendable {
+	struct EdgeConstraints: Sendable {
 		var lead: NSLayoutConstraint?
 		var trail: NSLayoutConstraint?
 		var top: NSLayoutConstraint?

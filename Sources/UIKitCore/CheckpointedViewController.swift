@@ -15,8 +15,7 @@ import UIKit
 /// Base `UIViewController` for consistent view lifecycle and checkpointing.
 /// Subclass and override the open `vc...` methods to customize behavior.
 open class CheckpointedViewController: UIViewController,
-									   Entity,
-									   @unchecked Sendable {
+									   Entity {
 	// MARK: + Public scope
 
 	public let identifier: UInt64

@@ -43,7 +43,7 @@ public extension UIView {
 		}
 	}
 
-	struct AxisConstraints: @unchecked Sendable {
+	struct AxisConstraints: Sendable {
 		var vertical: NSLayoutConstraint?
 		var horizontal: NSLayoutConstraint?
 

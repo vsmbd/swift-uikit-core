@@ -43,7 +43,7 @@ public extension UIView {
 		}
 	}
 
-	struct SizeConstraints: @unchecked Sendable {
+	struct SizeConstraints: Sendable {
 		var height: NSLayoutConstraint?
 		var width: NSLayoutConstraint?
 
