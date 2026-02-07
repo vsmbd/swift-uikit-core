@@ -153,7 +153,10 @@ open class CheckpointedView: UIView,
 		inside point: CGPoint,
 		with event: UIEvent?
 	) -> Bool {
-		return super.point(inside: point, with: event)
+		super.point(
+			inside: point,
+			with: event
+		)
 	}
 
 	public override func hitTest(
@@ -172,7 +175,10 @@ open class CheckpointedView: UIView,
 		_ point: CGPoint,
 		with event: UIEvent?
 	) -> UIView? {
-		return super.hitTest(point, with: event)
+		super.hitTest(
+			point,
+			with: event
+		)
 	}
 
 	// MARK: ++ Traits
