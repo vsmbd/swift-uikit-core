@@ -22,9 +22,15 @@ open class CheckpointedView: UIView,
 
 	// MARK: ++ Init
 
-	public override init(frame: CGRect) {
+	public init() {
 		self.identifier = Self.nextID
-		super.init(frame: frame)
+
+		super.init(frame: .zero)
+
+		translatesAutoresizingMaskIntoConstraints = false
+		clipsToBounds = true
+		backgroundColor = .clear
+
 		measured {
 			initialize()
 		}
@@ -34,8 +40,12 @@ open class CheckpointedView: UIView,
 		//
 	}
 
+	public override init(frame: CGRect) {
+		fatalError("CheckpointedView must be instantiated programmatically init()")
+	}
+
 	public required init?(coder: NSCoder) {
-		fatalError("CheckpointedView must be instantiated programmatically (init(frame:))")
+		fatalError("CheckpointedView must be instantiated programmatically init()")
 	}
 
 	// MARK: ++ Layout
