@@ -17,15 +17,6 @@ public extension UIView {
 		get { backgroundColor }
 		set { backgroundColor = newValue }
 	}
-
-	@inlinable
-	static func instance() -> Self {
-		let instance = Self(frame: .zero)
-		instance.translatesAutoresizingMaskIntoConstraints = false
-		instance.clipsToBounds = true
-		instance.backgroundColor = .clear
-		return instance
-	}
 }
 
 #endif

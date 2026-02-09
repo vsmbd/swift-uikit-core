@@ -44,11 +44,11 @@ public extension UIView {
 	}
 
 	struct SizeConstraints: Sendable {
-		var height: NSLayoutConstraint?
-		var width: NSLayoutConstraint?
+		public var height: NSLayoutConstraint?
+		public var width: NSLayoutConstraint?
 
 		@MainActor
-		var activate: Bool = false {
+		public var activate: Bool = false {
 			didSet {
 				height?.isActive = activate
 				width?.isActive = activate

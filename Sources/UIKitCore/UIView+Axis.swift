@@ -44,11 +44,11 @@ public extension UIView {
 	}
 
 	struct AxisConstraints: Sendable {
-		var vertical: NSLayoutConstraint?
-		var horizontal: NSLayoutConstraint?
+		public var vertical: NSLayoutConstraint?
+		public var horizontal: NSLayoutConstraint?
 
 		@MainActor
-		var activate: Bool = false {
+		public var activate: Bool = false {
 			didSet {
 				vertical?.isActive = activate
 				horizontal?.isActive = activate

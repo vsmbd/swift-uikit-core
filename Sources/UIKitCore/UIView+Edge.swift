@@ -62,13 +62,13 @@ public extension UIView {
 	}
 
 	struct EdgeConstraints: Sendable {
-		var lead: NSLayoutConstraint?
-		var trail: NSLayoutConstraint?
-		var top: NSLayoutConstraint?
-		var bottom: NSLayoutConstraint?
+		public var lead: NSLayoutConstraint?
+		public var trail: NSLayoutConstraint?
+		public var top: NSLayoutConstraint?
+		public var bottom: NSLayoutConstraint?
 
 		@MainActor
-		var activate: Bool = false {
+		public var activate: Bool = false {
 			didSet {
 				lead?.isActive = activate
 				trail?.isActive = activate
