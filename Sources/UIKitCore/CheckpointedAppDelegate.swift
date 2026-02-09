@@ -87,6 +87,28 @@ open class CheckpointedAppDelegate: UIResponder,
 
 	open var window: UIWindow?
 
+	/// The app's key window, if any.
+	/// Uses the foreground active scene on iOS 13+
+	open var keyWindow: UIWindow? {
+		if #available(iOS 13.0, *) {
+			let scenes = UIApplication.shared
+				.connectedScenes
+				.compactMap { $0 as? UIWindowScene }
+
+			if #available(iOS 15.0, *) {
+				return scenes
+					.first { $0.activationState == .foregroundActive }?
+					.keyWindow
+				?? scenes.first?.keyWindow
+			} else {
+				return scenes.flatMap(\.windows)
+					.first(where: \.isKeyWindow)
+			}
+		} else {
+			return window
+		}
+	}
+
 	// MARK: ++ Init
 
 	public override init() {
@@ -208,6 +230,53 @@ open class CheckpointedAppDelegate: UIResponder,
 	}
 
 	open func appWillTerminate(_ application: UIApplication) {
+		//
+	}
+
+	// MARK: ++ Scenes
+
+	@available(iOS 13.0, *)
+	public func application(
+		_ application: UIApplication,
+		configurationForConnecting connectingSceneSession: UISceneSession,
+		options: UIScene.ConnectionOptions
+	) -> UISceneConfiguration {
+		measured {
+			app(
+				application,
+				configurationForConnecting: connectingSceneSession,
+				options: options
+			)
+		}
+	}
+
+	@available(iOS 13.0, *)
+	open func app(
+		_ application: UIApplication,
+		configurationForConnecting connectingSceneSession: UISceneSession,
+		options: UIScene.ConnectionOptions
+	) -> UISceneConfiguration {
+		fatalError("Must be overriden by subclasses")
+	}
+
+	@available(iOS 13.0, *)
+	public func application(
+		_ application: UIApplication,
+		didDiscardSceneSessions sceneSessions: Set<UISceneSession>
+	) {
+		measured {
+			app(
+				application,
+				didDiscardSceneSessions: sceneSessions
+			)
+		}
+	}
+
+	@available(iOS 13.0, *)
+	open func app(
+		_ application: UIApplication,
+		didDiscardSceneSessions sceneSessions: Set<UISceneSession>
+	) {
 		//
 	}
 
