@@ -37,7 +37,11 @@ public extension UIView {
 		_ subview: UIView?,
 		_ edgeVectors: [EdgeVector]
 	) -> EdgeConstraints? {
-		guard let subview, !edgeVectors.isEmpty else { return nil }
+		guard let subview,
+			  edgeVectors.isEmpty == false else {
+			return nil
+		}
+
 		var constraints = EdgeConstraints()
 		for edgeVector in edgeVectors {
 			let layoutConstraint = align(subview, edgeVector)
@@ -52,14 +56,18 @@ public extension UIView {
 		_ edges: [Edge] = Edge.all,
 		_ constraint: Constraint = .equal
 	) -> EdgeConstraints? {
-		guard let subview, !edges.isEmpty else { return nil }
-		var result = EdgeConstraints()
+		guard let subview,
+			  edges.isEmpty == false else {
+			return nil
+		}
+
+		var constraints = EdgeConstraints()
 		for edge in edges {
 			let edgeVector = EdgeVector(edge, constraint)
 			let layoutConstraint = align(subview, edgeVector)
-			result.set(edge, layoutConstraint)
+			constraints.set(edge, layoutConstraint)
 		}
-		return result
+		return constraints
 	}
 }
 
