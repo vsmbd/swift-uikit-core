@@ -2,24 +2,58 @@
 
 UIKitCore is a small, opinionated UIKit platform layer for iOS apps targeting **iOS 12+**.
 
-Right now it provides one primary primitive:
+It provides checkpointed lifecycle bases so every app and scene can use the same predictable foundation:
 
-- **CheckpointedAppDelegate**: a base `UIApplicationDelegate` that bootstraps a consistent app lifecycle and captures a deterministic “session baseline” (AppInfo, DeviceInfo, TimeInfo) at launch.
+- **CheckpointedAppDelegate**: base `UIApplicationDelegate` that bootstraps app lifecycle and captures a deterministic “session baseline” (AppInfo, DeviceInfo, TimeInfo) at launch.
+- **CheckpointedSceneDelegate**: base `UISceneDelegate` for iOS 13+ scene lifecycle (connection, foreground/background, URL contexts, user activity, state restoration).
+- **CheckpointedView**: base `UIView` with checkpointed layout, drawing, hit-test, and superview/window lifecycle hooks.
+- **CheckpointedViewController**: base `UIViewController` with checkpointed load/view lifecycle, layout, transition, and parent/trait hooks.
 
-The goal is to make every app start from the same predictable foundation so higher-level packages (telemetry, diagnostics, performance tooling, feature modules) can plug in without each app inventing its own bootstrapping patterns.
+Each type follows the same pattern: system callbacks are wrapped in `measured { }` and forwarded to open methods with a short prefix (`app`, `scn`, `vw`, `vc`). Subclass and override those open methods to customize behavior; the protocol-fulfilling methods are not intended to be overridden so checkpointing stays consistent.
+
+The goal is to make app, scene, view, and view-controller lifecycles observable and consistent so higher-level packages (telemetry, diagnostics, performance tooling, feature modules) can plug in without each app inventing its own patterns.
 
 ---
 
 ## What you get
 
 ### CheckpointedAppDelegate
-`CheckpointedAppDelegate` is intended to be subclassed by your app:
+Subclass as your app delegate:
 
-- centralizes bootstrap flow (launch, lifecycle transitions)
-- captures a baseline snapshot exactly once per process/session
-- provides a consistent place to attach “checkpoint” emissions later (future work)
+- centralizes bootstrap flow (launch, lifecycle, scenes, URLs, user activity, state restoration, etc.)
+- captures a baseline snapshot exactly once per process/session (AppInfo, DeviceInfo, TimeInfo)
+- exposes `settingsStore` (UserDefaults) and `secureStore` (Keychain) for install/session identity
+- provides `keyWindow` (foreground scene on iOS 13+)
+- registers with Telme for app-level checkpointing
 
-UIKitCore does not require any networking, storage, or backend setup. It only captures and exposes baseline information.
+Override the open `app...` methods; do not override the `application(...)` methods.
+
+### CheckpointedSceneDelegate (iOS 13+)
+Subclass as your scene delegate when using scene-based lifecycle:
+
+- handles scene connection, disconnect, and lifecycle (active, foreground, background)
+- URL contexts, user activity (continue, fail, update), and state restoration
+- override the open `scn...` methods; do not override the `scene(...)` / `sceneDid...` methods
+
+### CheckpointedView
+Subclass for views that participate in checkpointing:
+
+- layout (`layoutSubviews`, `updateConstraints`), drawing (`draw`), sizing (`sizeThatFits`)
+- superview/window moves, hit-test (`point(inside:with:)`, `hitTest(_:with:)`), traits
+- override the open `vw...` methods; do not override the UIKit overrides
+
+Programmatic init only: use `init(frame:)`; `init(coder:)` fatals.
+
+### CheckpointedViewController
+Subclass for view controllers that participate in checkpointing:
+
+- view load, viewDidLoad, will/did appear/disappear, layout, transition, parent move, traits
+- `viewIsAppearing` (iOS 13+)
+- override the open `vc...` methods; do not override the UIKit overrides
+
+Programmatic init only: use `init()`; nib/coder inits fatal.
+
+UIKitCore does not require any networking, storage, or backend setup beyond what CheckpointedAppDelegate uses for install/session identity. It captures and exposes baseline information and provides consistent lifecycle hooks.
 
 ---
 
@@ -36,11 +70,10 @@ Recommended fields:
 - `appVersion: String`
   - human-facing version string (e.g. `1.4.2`)
 - `installId: UUID`
-  - a stable identifier for the install on that device (generated and persisted by the host app; UIKitCore does not prescribe storage)
+  - a stable identifier for the install on that device (generated and persisted by `CheckpointedAppDelegate` via its `secureStore`)
 
 Notes:
 - UIKitCore will never infer business meaning from these values.
-- UIKitCore will not attempt to generate or persist install identifiers by default (host app responsibility).
 
 ---
 
@@ -94,11 +127,16 @@ Notes:
 
 ## Repository structure (suggested)
 - `Sources/UIKitCore/CheckpointedAppDelegate.swift`
+- `Sources/UIKitCore/CheckpointedSceneDelegate.swift`
+- `Sources/UIKitCore/CheckpointedView.swift`
+- `Sources/UIKitCore/CheckpointedViewController.swift`
 - `Sources/UIKitCore/AppInfo.swift`
 - `Sources/UIKitCore/DeviceInfo.swift`
 - `Sources/UIKitCore/TimeInfo.swift`
+- `Sources/UIKitCore/Utilities+*.swift`
+- `Sources/UIKitCore/UIView+*.swift` (layout, anchor, chain, etc.)
 
 ---
 
 ## Status
-UIKitCore is intentionally small. Expect API surface to evolve as the railiOS ecosystem matures, but the intent is to keep this package stable and boring: bootstrapping + platform primitives.
+UIKitCore is intentionally small. Expect API surface to evolve as the ecosystem matures, but the intent is to keep this package stable and boring: bootstrapping + checkpointed lifecycle bases + platform primitives.

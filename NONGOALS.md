@@ -34,7 +34,7 @@ UIKitCore will not impose:
 - state management approaches
 - MVVM/MVI opinionation
 
-It provides a bootstrap seam, not a complete architecture.
+It provides checkpointed lifecycle bases (AppDelegate, SceneDelegate, View, ViewController) and a bootstrap seam, not a complete architecture or a full UI component/layout framework.
 
 ## 5) Not a compatibility abstraction for every iOS version quirk
 UIKitCore targets iOS 12+ and aims for pragmatic compatibility, but it will not become a grab bag of unrelated polyfills. Anything that isn’t directly related to bootstrapping and platform primitives should live elsewhere.
