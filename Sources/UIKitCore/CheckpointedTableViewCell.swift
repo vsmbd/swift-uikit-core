@@ -15,7 +15,7 @@ import UIKit
 /// Base `UITableViewCell` for consistent identity and checkpointing.
 /// Subclass and override the open `cell...` methods to customize behavior or add instrumentation.
 open class CheckpointedTableViewCell: UITableViewCell,
-									 Entity {
+									  Entity {
 	// MARK: + Public scope
 
 	public let identifier: UInt64

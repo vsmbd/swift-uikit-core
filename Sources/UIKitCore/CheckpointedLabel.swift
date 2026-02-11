@@ -20,9 +20,13 @@ open class CheckpointedLabel: UILabel,
 
 	public let identifier: UInt64
 
+	/// Logical id for this label (e.g. from `CheckpointedViewController.label(id:)`). Immutable after init.
+	public let viewId: String
+
 	// MARK: ++ Init
 
-	public init() {
+	public init(viewId: String) {
+		self.viewId = viewId
 		self.identifier = Self.nextID
 		super.init(frame: .zero)
 		measured {
@@ -31,11 +35,11 @@ open class CheckpointedLabel: UILabel,
 	}
 
 	public override init(frame: CGRect) {
-		fatalError("CheckpointedLabel must be instantiated with init()")
+		fatalError("CheckpointedLabel must be instantiated with init(viewId:)")
 	}
 
 	public required init?(coder: NSCoder) {
-		fatalError("CheckpointedLabel must be instantiated with init()")
+		fatalError("CheckpointedLabel must be instantiated with init(viewId:)")
 	}
 
 	open func initialize() {

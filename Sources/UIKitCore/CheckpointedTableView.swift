@@ -20,39 +20,44 @@ open class CheckpointedTableView: UITableView,
 
 	public let identifier: UInt64
 
+	/// Logical id for this table (e.g. from `CheckpointedViewController.table(id:)`). Immutable after init.
+	public let viewId: String
+
 	// MARK: ++ Init
 
-	public convenience init() {
-		self.init(
-			frame: .zero,
-			style: .plain
-		)
+	public convenience init(viewId: String) {
+		self.init(viewId: viewId, frame: .zero, style: .plain)
 	}
 
-	public override init(
+	public init(
+		viewId: String,
 		frame: CGRect,
 		style: UITableView.Style
 	) {
+		self.viewId = viewId
 		self.identifier = Self.nextID
-		super.init(
-			frame: frame,
-			style: style
-		)
+		super.init(frame: frame, style: style)
 		translatesAutoresizingMaskIntoConstraints = false
 		measured {
 			initialize()
 		}
 	}
 
+	public override init(frame: CGRect, style: UITableView.Style) {
+		fatalError("CheckpointedTableView must be instantiated with init(viewId:) or init(viewId:frame:style:)")
+	}
+
 	public required init?(coder: NSCoder) {
 		fatalError(
-			"CheckpointedTableView must be instantiated with init() or init(frame:style:)"
+			"CheckpointedTableView must be instantiated with init(viewId:) or init(viewId:frame:style:)"
 		)
 	}
 
 	open func initialize() {
 		//
 	}
+
+	// MARK: ++ Selection hooks (for Step 2 instrumentation)
 
 	public override func deselectRow(
 		at indexPath: IndexPath,

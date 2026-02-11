@@ -20,9 +20,13 @@ open class CheckpointedButton: UIButton,
 
 	public let identifier: UInt64
 
+	/// Logical id for this button (e.g. from `CheckpointedViewController.button(id:)`). Immutable after init.
+	public let viewId: String
+
 	// MARK: ++ Init
 
-	public init(type buttonType: UIButton.ButtonType = .system) {
+	public init(viewId: String, type buttonType: UIButton.ButtonType = .system) {
+		self.viewId = viewId
 		self.identifier = Self.nextID
 		super.init(type: buttonType)
 		measured {
@@ -31,11 +35,11 @@ open class CheckpointedButton: UIButton,
 	}
 
 	public override init(frame: CGRect) {
-		fatalError("CheckpointedButton must be instantiated with init(type:)")
+		fatalError("CheckpointedButton must be instantiated with init(viewId:type:)")
 	}
 
 	public required init?(coder: NSCoder) {
-		fatalError("CheckpointedButton must be instantiated with init(type:)")
+		fatalError("CheckpointedButton must be instantiated with init(viewId:type:)")
 	}
 
 	open func initialize() {

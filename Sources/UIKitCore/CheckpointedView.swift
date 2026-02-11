@@ -41,11 +41,11 @@ open class CheckpointedView: UIView,
 	}
 
 	public override init(frame: CGRect) {
-		fatalError("CheckpointedView must be instantiated programmatically init()")
+		fatalError("CheckpointedView must be instantiated with init()")
 	}
 
 	public required init?(coder: NSCoder) {
-		fatalError("CheckpointedView must be instantiated programmatically init()")
+		fatalError("CheckpointedView must be instantiated with init()")
 	}
 
 	// MARK: ++ Layout

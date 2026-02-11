@@ -20,16 +20,21 @@ open class CheckpointedCollectionView: UICollectionView,
 
 	public let identifier: UInt64
 
+	/// Logical id for this collection view (e.g. from `CheckpointedViewController.collectionView(id:)`). Immutable after init.
+	public let viewId: String
+
 	// MARK: ++ Init
 
-	public convenience init() {
-		self.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+	public convenience init(viewId: String) {
+		self.init(viewId: viewId, frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
 	}
 
-	public override init(
+	public init(
+		viewId: String,
 		frame: CGRect,
 		collectionViewLayout layout: UICollectionViewLayout
 	) {
+		self.viewId = viewId
 		self.identifier = Self.nextID
 		super.init(frame: frame, collectionViewLayout: layout)
 		translatesAutoresizingMaskIntoConstraints = false
@@ -38,8 +43,12 @@ open class CheckpointedCollectionView: UICollectionView,
 		}
 	}
 
+	public override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+		fatalError("CheckpointedCollectionView must be instantiated with init(viewId:) or init(viewId:frame:collectionViewLayout:)")
+	}
+
 	public required init?(coder: NSCoder) {
-		fatalError("CheckpointedCollectionView must be instantiated with init() or init(frame:collectionViewLayout:)")
+		fatalError("CheckpointedCollectionView must be instantiated with init(viewId:) or init(viewId:frame:collectionViewLayout:)")
 	}
 
 	open func initialize() {

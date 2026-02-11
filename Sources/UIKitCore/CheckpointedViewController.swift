@@ -16,13 +16,28 @@ import UIKit
 /// Subclass and override the open `vc...` methods to customize behavior.
 open class CheckpointedViewController: UIViewController,
 									   Entity {
+	// MARK: + Default scope
+
+	/// Buttons keyed by id. Use `button(id:)` to get or create.
+	var checkpointedButtons: [String: CheckpointedButton] = [:]
+	/// Labels keyed by id. Use `label(id:)` to get or create.
+	var checkpointedLabels: [String: CheckpointedLabel] = [:]
+	/// Table views keyed by id. Use `table(id:)` to get or create.
+	var checkpointedTables: [String: CheckpointedTableView] = [:]
+	/// Collection views keyed by id. Use `collectionView(id:)` to get or create.
+	var checkpointedCollectionViews: [String: CheckpointedCollectionView] = [:]
+
 	// MARK: + Public scope
 
 	public let identifier: UInt64
 
+	/// Logical id for this view controller. Immutable after init.
+	public let viewId: String
+
 	// MARK: ++ Init
 
-	public init() {
+	public init(viewId: String) {
+		self.viewId = viewId
 		self.identifier = Self.nextID
 		super.init(
 			nibName: nil,
@@ -41,11 +56,11 @@ open class CheckpointedViewController: UIViewController,
 		nibName nibNameOrNil: String?,
 		bundle nibBundleOrNil: Bundle?
 	) {
-		fatalError("CheckpointedViewController must be instantiated programmatically (init())")
+		fatalError("CheckpointedViewController must be instantiated with init(viewId:)")
 	}
 
 	public required init?(coder: NSCoder) {
-		fatalError("CheckpointedViewController must be instantiated programmatically (init())")
+		fatalError("CheckpointedViewController must be instantiated with init(viewId:)")
 	}
 
 	// MARK: ++ View loading
