@@ -17,11 +17,11 @@ public extension CheckpointedViewController {
 	/// Returns the checkpointed button for `id`, creating and caching one if it doesn't exist.
 	func button(id: String) -> CheckpointedButton {
 		measured {
-			if let existing = checkpointedButtons[id] {
+			if let existing = buttons[id] {
 				return existing
 			}
 			let button = CheckpointedButton(viewId: id)
-			checkpointedButtons[id] = button
+			buttons[id] = button
 			return button
 		}
 	}

@@ -18,11 +18,11 @@ public extension CheckpointedViewController {
 	/// Add to the view hierarchy, set delegate/dataSource, and configure as needed.
 	func table(id: String) -> CheckpointedTableView {
 		measured {
-			if let existing = checkpointedTables[id] {
+			if let existing = tables[id] {
 				return existing
 			}
 			let table = CheckpointedTableView(viewId: id)
-			checkpointedTables[id] = table
+			tables[id] = table
 			return table
 		}
 	}

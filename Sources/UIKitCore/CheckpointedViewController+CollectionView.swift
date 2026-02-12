@@ -18,11 +18,11 @@ public extension CheckpointedViewController {
 	/// Add to the view hierarchy, set delegate/dataSource, and configure as needed.
 	func collectionView(id: String) -> CheckpointedCollectionView {
 		measured {
-			if let existing = checkpointedCollectionViews[id] {
+			if let existing = collections[id] {
 				return existing
 			}
 			let collectionView = CheckpointedCollectionView(viewId: id)
-			checkpointedCollectionViews[id] = collectionView
+			collections[id] = collectionView
 			return collectionView
 		}
 	}

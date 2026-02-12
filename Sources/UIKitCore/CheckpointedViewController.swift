@@ -19,13 +19,16 @@ open class CheckpointedViewController: UIViewController,
 	// MARK: + Default scope
 
 	/// Buttons keyed by id. Use `button(id:)` to get or create.
-	var checkpointedButtons: [String: CheckpointedButton] = [:]
+	var buttons: [String: CheckpointedButton] = [:]
+
 	/// Labels keyed by id. Use `label(id:)` to get or create.
-	var checkpointedLabels: [String: CheckpointedLabel] = [:]
+	var labels: [String: CheckpointedLabel] = [:]
+
 	/// Table views keyed by id. Use `table(id:)` to get or create.
-	var checkpointedTables: [String: CheckpointedTableView] = [:]
+	var tables: [String: CheckpointedTableView] = [:]
+
 	/// Collection views keyed by id. Use `collectionView(id:)` to get or create.
-	var checkpointedCollectionViews: [String: CheckpointedCollectionView] = [:]
+	var collections: [String: CheckpointedCollectionView] = [:]
 
 	// MARK: + Public scope
 
@@ -37,8 +40,8 @@ open class CheckpointedViewController: UIViewController,
 	// MARK: ++ Init
 
 	public init(viewId: String) {
-		self.viewId = viewId
 		self.identifier = Self.nextID
+		self.viewId = viewId
 		super.init(
 			nibName: nil,
 			bundle: nil

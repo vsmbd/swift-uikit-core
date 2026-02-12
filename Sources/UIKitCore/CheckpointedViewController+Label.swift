@@ -18,11 +18,11 @@ public extension CheckpointedViewController {
 	/// Add to the view hierarchy and configure as needed.
 	func label(id: String) -> CheckpointedLabel {
 		measured {
-			if let existing = checkpointedLabels[id] {
+			if let existing = labels[id] {
 				return existing
 			}
 			let label = CheckpointedLabel(viewId: id)
-			checkpointedLabels[id] = label
+			labels[id] = label
 			return label
 		}
 	}
