@@ -25,10 +25,10 @@ open class CheckpointedButton: UIButton,
 
 	// MARK: ++ Init
 
-	public init(viewId: String, type buttonType: UIButton.ButtonType = .system) {
+	public init(viewId: String) {
 		self.viewId = viewId
 		self.identifier = Self.nextID
-		super.init(type: buttonType)
+		super.init(frame: .zero)
 		measured {
 			initialize()
 		}
